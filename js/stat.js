@@ -43,8 +43,9 @@ window.renderStatistics = function (ctx, names, times) {
 
   ctx.font = FONT_SIZE + 'px ' + FONT_FAMILY;
   ctx.fillStyle = FONT_COLOR;
-  ctx.fillText('Ура вы победили!', CLOUD_X + (GAP * 2), CLOUD_Y + FONT_SIZE + GAP);
-  ctx.fillText('Список результатов:', CLOUD_X + (GAP * 2), CLOUD_Y + FONT_SIZE + (GAP * 3));
+  var leftPosition = CLOUD_X + (GAP * 2);
+  ctx.fillText('Ура вы победили!', leftPosition, CLOUD_Y + FONT_SIZE + GAP);
+  ctx.fillText('Список результатов:', leftPosition, CLOUD_Y + FONT_SIZE + (GAP * 3));
 
   var barHeight;
   var barColor;
@@ -52,11 +53,7 @@ window.renderStatistics = function (ctx, names, times) {
 
   for (var i = 0; i < names.length; i++) {
     barHeight = (times[i] / maxElement) * BAR_HEIGHT;
-    if (names[i] === 'Вы') {
-      barColor = 'hsl(0, 100%, 50%)';
-    } else {
-      barColor = 'hsl(255, ' + Math.random() * 100 + '%, 50%)';
-    }
-    createResultBar(ctx, CLOUD_X + (GAP * 2) + (BAR_WIDTH * i) + (BAR_MARGIN * i), CLOUD_HEIGHT - GAP, names[i], Math.round(times[i]), Math.round(barHeight), barColor);
+    barColor = (names[i] === 'Вы') ? 'hsl(0, 100%, 50%)' : 'hsl(255, ' + Math.random() * 100 + '%, 50%)';
+    createResultBar(ctx, leftPosition + (BAR_WIDTH * i) + (BAR_MARGIN * i), CLOUD_HEIGHT - GAP, names[i], Math.round(times[i]), Math.round(barHeight), barColor);
   }
 };
