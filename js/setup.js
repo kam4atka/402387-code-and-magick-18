@@ -14,7 +14,6 @@ var WIZARD_FIREBALLWRAP = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'
 
 var setupPopupOpen = document.querySelector('.setup-open-icon');
 var setupPopup = document.querySelector('.setup');
-var setupPopupForm = setupPopup.querySelector('.setup-wizard-form');
 var setupPopupClose = setupPopup.querySelector('.setup-close');
 var setupPopupUsername = setupPopup.querySelector('.setup-user-name');
 
@@ -28,7 +27,6 @@ var setupWizardFireball = setupWizardFireballWrap.querySelector('.setup-fireball
 var setupSimilar = setupPopup.querySelector('.setup-similar');
 setupSimilar.classList.remove('hidden');
 var setupSimilarList = setupPopup.querySelector('.setup-similar-list');
-var setupPopupSubmit = setupPopup.querySelector('.setup-submit');
 
 var getRandomCount = function (min, max) {
   return Math.ceil(Math.random() * (max - min) + min);
@@ -109,19 +107,19 @@ setupPopupUsername.addEventListener('keydown', function (evt) {
 
 var wizardPathColorGenerate = function (element) {
   if (element.classList.contains('wizard-coat')) {
-    var color = WIZARD_COATCOLORS[getRandomCount(0, WIZARD_COATCOLORS.length - 1)];
-    element.style.fill = color;
-    setupPlayer.querySelector('input[name="coat-color"]').setAttribute('value', color);
+    var colorCoat = WIZARD_COATCOLORS[getRandomCount(0, WIZARD_COATCOLORS.length - 1)];
+    element.style.fill = colorCoat;
+    setupPlayer.querySelector('input[name="coat-color"]').setAttribute('value', colorCoat);
   }
   if (element.classList.contains('wizard-eyes')) {
-    var color = WIZARD_EYECOLORS[getRandomCount(0, WIZARD_EYECOLORS.length - 1)];
-    element.style.fill = color;
-    setupPlayer.querySelector('input[name="eyes-color"]').setAttribute('value', color);
+    var colorEyes = WIZARD_EYECOLORS[getRandomCount(0, WIZARD_EYECOLORS.length - 1)];
+    element.style.fill = colorEyes;
+    setupPlayer.querySelector('input[name="eyes-color"]').setAttribute('value', colorEyes);
   }
   if (element.classList.contains('setup-fireball-wrap')) {
-    var color = WIZARD_FIREBALLWRAP[getRandomCount(0, WIZARD_FIREBALLWRAP.length - 1)];
-    element.style.background = color;
-    setupPlayer.querySelector('input[name="fireball-color"]').setAttribute('value', color);
+    var colorFireball = WIZARD_FIREBALLWRAP[getRandomCount(0, WIZARD_FIREBALLWRAP.length - 1)];
+    element.style.background = colorFireball;
+    setupPlayer.querySelector('input[name="fireball-color"]').setAttribute('value', colorFireball);
   }
 };
 
