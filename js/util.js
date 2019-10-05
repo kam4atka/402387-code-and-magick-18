@@ -2,16 +2,14 @@
 
 (function () {
   var KeyCodes = {
-    esc: 27,
-    enter: 13
+    ESC: 27,
+    ENTER: 13
+  };
+  var getRandomCount = function (min, max) {
+    return Math.ceil(Math.random() * (max - min) + min);
   };
   window.util = {
-    keyCode: {
-      esc: KeyCodes.esc,
-      enter: KeyCodes.enter
-    },
-    getRandomCount: function (min, max) {
-      return Math.ceil(Math.random() * (max - min) + min);
-    }
+    KeyCodes: KeyCodes,
+    getRandomCount: getRandomCount,
   };
 })();
