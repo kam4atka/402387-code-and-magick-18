@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-  var KeyCodes = {
+  var KeyCode = {
     ESC: 27,
     ENTER: 13
   };
@@ -9,7 +9,7 @@
     return Math.ceil(Math.random() * (max - min) + min);
   };
   window.util = {
-    KeyCodes: KeyCodes,
+    KeyCode: KeyCode,
     getRandomCount: getRandomCount,
   };
 })();

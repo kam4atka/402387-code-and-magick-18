@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+  var WIZARD_SIMILAR_COUNT = 4;
   var WIZARD_COATCOLORS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
   var WIZARD_EYECOLORS = ['black', 'red', 'blue', 'yellow', 'green'];
   var WIZARD_FIREBALLWRAP = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
@@ -22,13 +23,27 @@
   setupSimilar.classList.remove('hidden');
   var setupSimilarList = setupPopup.querySelector('.setup-similar-list');
 
-  setupSimilarList.appendChild(window.dataTest.getListWizards(window.dataTest.generateArrayWizards(WIZARD_COATCOLORS, WIZARD_EYECOLORS)));
+  var getListSimilarWizards = function (arr) {
+    var fragment = document.createDocumentFragment();
+    var wizardTemplate = document.querySelector('#similar-wizard-template').content;
+    for (var i = 0; i < WIZARD_SIMILAR_COUNT; i++) {
+      var wizardNode = wizardTemplate.cloneNode(true);
+      wizardNode.querySelector('.setup-similar-label').textContent = arr[i].name;
+      wizardNode.querySelector('.wizard-coat').setAttribute('fill', arr[i].coatColor);
+      wizardNode.querySelector('.wizard-eyes').setAttribute('fill', arr[i].eyeColor);
+      fragment.appendChild(wizardNode);
+    }
+    return fragment;
+  };
 
   var openModalHandler = function (element) {
     element.classList.remove('hidden');
     setupPopup.style.top = '';
     setupPopup.style.left = '';
     document.addEventListener('keydown', escModalHandler);
+    window.backend.load(function (wizards) {
+      setupSimilarList.appendChild(getListSimilarWizards(wizards));
+    });
   };
 
   var closeModalHandler = function (element) {
@@ -37,7 +52,7 @@
   };
 
   var escModalHandler = function (evt) {
-    if (evt.keyCode === window.util.KeyCodes.ESC) {
+    if (evt.keyCode === window.util.KeyCode.ESC) {
       closeModalHandler(setupPopup);
     }
   };
@@ -47,7 +62,7 @@
   });
 
   setupPopupOpen.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === window.util.KeyCodes.ENTER) {
+    if (evt.keyCode === window.util.KeyCode.ENTER) {
       openModalHandler(setupPopup);
     }
   });
@@ -57,7 +72,7 @@
   });
 
   setupPopupClose.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === window.util.KeyCodes.ENTER) {
+    if (evt.keyCode === window.util.KeyCode.ENTER) {
       closeModalHandler(setupPopup);
     }
   });
