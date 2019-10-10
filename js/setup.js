@@ -38,10 +38,23 @@
     return fragment;
   };
 
+  var setLoadError = function (error) {
+    var node = document.createElement('div');
+    node.style.position = "absolute";
+    node.style.top = 0;
+    node.style.left = 0;
+    node.style.width = '100%';
+    node.style.textAlign = 'center';
+    node.style.backgroundColor = 'red';
+    node.style.zIndex = 5;
+    node.textContent = error;
+    document.body.insertAdjacentElement('afterbegin', node);
+  };
+
   var windowLoadHandler = function () {
     window.backend.load(function (wizards) {
       setupSimilarList.appendChild(getListSimilarWizards(wizards));
-    });
+    }, setLoadError);
   };
 
   window.addEventListener('load', windowLoadHandler);
@@ -55,7 +68,7 @@
       evt.preventDefault();
       window.backend.save(new FormData(setupPopupForm), function () {
         closeModalHandler(setupPopup);
-      });
+      }, setLoadError);
     });
   };
 
