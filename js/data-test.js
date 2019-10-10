@@ -8,8 +8,8 @@
   var getRandomWizard = function (arrayCoatColor, arrayEyeColor) {
     var hero = {
       name: WIZARD_NAMES[window.util.getRandomCount(0, WIZARD_NAMES.length - 1)] + ' ' + WIZARD_SURNAMES[window.util.getRandomCount(0, WIZARD_SURNAMES.length - 1)],
-      coatColor: arrayCoatColor[window.util.getRandomCount(0, arrayCoatColor.length - 1)],
-      eyeColor: arrayEyeColor[window.util.getRandomCount(0, arrayEyeColor.length - 1)],
+      colorCoat: arrayCoatColor[window.util.getRandomCount(0, arrayCoatColor.length - 1)],
+      colorEyes: arrayEyeColor[window.util.getRandomCount(0, arrayEyeColor.length - 1)],
     };
     return hero;
   };

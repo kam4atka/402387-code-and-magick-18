@@ -28,9 +28,10 @@
     var wizardTemplate = document.querySelector('#similar-wizard-template').content;
     for (var i = 0; i < WIZARD_SIMILAR_COUNT; i++) {
       var wizardNode = wizardTemplate.cloneNode(true);
-      wizardNode.querySelector('.setup-similar-label').textContent = arr[i].name;
-      wizardNode.querySelector('.wizard-coat').setAttribute('fill', arr[i].coatColor);
-      wizardNode.querySelector('.wizard-eyes').setAttribute('fill', arr[i].eyeColor);
+      var randomNum = window.util.getRandomCount(0, arr.length - 1);
+      wizardNode.querySelector('.setup-similar-label').textContent = arr[randomNum].name;
+      wizardNode.querySelector('.wizard-coat').setAttribute('fill', arr[randomNum].colorCoat);
+      wizardNode.querySelector('.wizard-eyes').setAttribute('fill', arr[randomNum].colorEyes);
       fragment.appendChild(wizardNode);
     }
     return fragment;
