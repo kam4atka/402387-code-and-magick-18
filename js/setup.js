@@ -40,7 +40,7 @@
 
   var setLoadError = function (error) {
     var node = document.createElement('div');
-    node.style.position = "absolute";
+    node.style.position = 'absolute';
     node.style.top = 0;
     node.style.left = 0;
     node.style.width = '100%';
