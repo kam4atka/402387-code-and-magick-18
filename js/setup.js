@@ -36,14 +36,19 @@
     return fragment;
   };
 
+  var windowLoadHandler = function () {
+    window.backend.load(function (wizards) {
+      setupSimilarList.appendChild(getListSimilarWizards(wizards));
+    });
+  };
+
+  window.addEventListener('load', windowLoadHandler);
+
   var openModalHandler = function (element) {
     element.classList.remove('hidden');
     setupPopup.style.top = '';
     setupPopup.style.left = '';
     document.addEventListener('keydown', escModalHandler);
-    window.backend.load(function (wizards) {
-      setupSimilarList.appendChild(getListSimilarWizards(wizards));
-    });
   };
 
   var closeModalHandler = function (element) {
