@@ -29,9 +29,9 @@
   };
 
   var clearSimilarList = function () {
-    for (var i = setupSimilarList.children.length - 1; i >= 0; i--) {
-      setupSimilarList.children[i].remove();
-    }
+    Array.from(setupSimilarList.children).forEach(function (item) {
+      item.remove();
+    });
   };
 
   var getListSimilarWizards = function (arr) {
@@ -58,14 +58,14 @@
       }
       return diffRank;
     });
-    clearSimilarList();
+    if (setupSimilarList.children.length !== 0) {
+      clearSimilarList();
+    }
     setupSimilarList.appendChild(getListSimilarWizards(resultArr.slice(0, WIZARD_SIMILAR_COUNT)));
     return resultArr;
   };
 
   window.similar = {
-    setupSimilarList: setupSimilarList,
-    getListSimilarWizards: getListSimilarWizards,
-    updateSimilarWizards: updateSimilarWizards
+    updateWizards: updateSimilarWizards
   };
 })();

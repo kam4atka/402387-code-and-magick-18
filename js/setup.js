@@ -35,7 +35,7 @@
   var wizards = [];
   var windowLoadHandler = function () {
     window.backend.load(function (data) {
-      wizards = window.similar.updateSimilarWizards(data, getPathColor(setupWizardCoat), getPathColor(setupWizardEyes));
+      wizards = window.similar.updateWizards(data, getPathColor(setupWizardCoat), getPathColor(setupWizardEyes));
     }, setLoadError);
   };
 
@@ -93,22 +93,20 @@
     return element.style.fill;
   };
 
+  var updateWizard = window.debounce(window.similar.updateWizards);
+
   var wizardPathColorGenerate = function (element) {
     if (element.classList.contains('wizard-coat')) {
       var colorCoat = WIZARD_COATCOLORS[window.util.getRandomCount(0, WIZARD_COATCOLORS.length - 1)];
       element.style.fill = colorCoat;
       setupPlayer.querySelector('input[name="coat-color"]').value = colorCoat;
-      window.debounce(function () {
-        window.similar.updateSimilarWizards(wizards, getPathColor(setupWizardCoat), getPathColor(setupWizardEyes));
-      });
+      updateWizard(wizards, getPathColor(setupWizardCoat), getPathColor(setupWizardEyes));
     }
     if (element.classList.contains('wizard-eyes')) {
       var colorEyes = WIZARD_EYECOLORS[window.util.getRandomCount(0, WIZARD_EYECOLORS.length - 1)];
       element.style.fill = colorEyes;
       setupPlayer.querySelector('input[name="eyes-color"]').value = colorEyes;
-      window.debounce(function () {
-        window.similar.updateSimilarWizards(wizards, getPathColor(setupWizardCoat), getPathColor(setupWizardEyes));
-      });
+      updateWizard(wizards, getPathColor(setupWizardCoat), getPathColor(setupWizardEyes));
     }
     if (element.classList.contains('setup-fireball-wrap')) {
       var colorFireball = WIZARD_FIREBALLWRAP[window.util.getRandomCount(0, WIZARD_FIREBALLWRAP.length - 1)];
